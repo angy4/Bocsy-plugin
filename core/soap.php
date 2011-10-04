@@ -1,12 +1,10 @@
-/*
- * <?php
- * For color syntax in vim
- */
+<?php
 
-require_once('../lib/nusoap.php');
+require_once(PLUGIN_PATH_BOCSY . '/lib/nusoap.php');
 try {
-  $wsdl = "http://dv.komput.net/test/bocsy.wsdl";
-  $client = new soapclient($wsdl, 'wsdl');
+  $wsdlurl = "http://dv.komput.net/test/bocsy.wsdl";
+  $wsdl = new wsdl($wsdl, '', '', '', '', 0, 30, null, 0);
+  $client = new nusoap_client($wsdlurl, 1, '', '', '', '', 10, 15,  'bocsy');
   $err = $client->getError();
 
 if ($err) {
@@ -17,7 +15,4 @@ if ($err) {
 } catch (Exception $e) {
   echo $e;
 }
-
-/*
- * ?>
- */
+?>

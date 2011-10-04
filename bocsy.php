@@ -54,15 +54,20 @@ class Bocsy {
 
 		// Initialize
 		$this->constants();
-
+		
 		// Define shortcodes and hooks
 		add_shortcode( 'bocsy', array('Bocsy', 'bocsy_handler') );
-	
-
+		add_action('template_redirect', 'bocsy_session', 0);	
+        	function bocsy_session() {
+                	$session_id = session_id();
+               		if (empty($session_id))
+                	        session_start();
+        	}
+		
 		// Finished initializing
 		do_action( 'bocsy_init' );
 	}
-
+	
 	/**
 	 * Initialize the basic Bocsy constants
 	 */
@@ -99,5 +104,6 @@ $bocsy = new Bocsy();
 
 // Activation
 register_activation_hook( __FILE__, array( $bocsy, 'install' ) )
+
 ?>
 
