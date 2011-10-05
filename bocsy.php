@@ -91,14 +91,15 @@ class Bocsy {
 	 * Bocsy Main Plugin Call
 	 */
 	function bocsy_handler() {
-		require_once('core/soap.php');
-		require_once('core/dispatch.php');
-		return Bocsy::dispatch($q);
+		include('core/soap.php');
+		$q = $_POST['page'];
+		$d = new Dispatch();
+		return $d->dispatch($q);
 		// return "Hello World!!";
 	}
 
 }
-
+include('core/dispatch.php');
 // Start Bocsy
 $bocsy = new Bocsy();
 
