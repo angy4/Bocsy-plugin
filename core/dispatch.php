@@ -14,25 +14,33 @@ function dispatch($q = 'empty') {
 		echo $e;
 	}
 
+switch ($q){
+
+
+	case "home":
+	include_once(PLUGIN_PATH_BOCSY . '/page/home.php');
+	break;
+
+	case "logout":
+	include_once(PLUGIN_PATH_BOCSY . '/page/logout.php');
+	break;
+
+	case "empty":
+	if (empty($_POST['page'])) {
 	$bsession = $_SESSION['bsession'];
 
 	if (empty($bsession)) {
-		include(PLUGIN_PATH_BOCSY . '/page/login.php');
+		include_once(PLUGIN_PATH_BOCSY . '/page/login.php');
+	} else {
+		include_once(PLUGIN_PATH_BOCSY . '/page/home.php');
 	}
-
-switch ($q){
-	case "empty":
-	case "home":
-		include(PLUGIN_PATH_BOCSY . '/page/home.php');
-		break;
-	case "logout":
-		include(PLUGIN_PATH_BOCSY . '/page/logout.php');
-		break;
-	default:
-		include(PLUGIN_PATH_BOCSY . '/page/error.php');
-}
+	}
+	break;
 
 }
+}
+
 }
 ?>
+
 
